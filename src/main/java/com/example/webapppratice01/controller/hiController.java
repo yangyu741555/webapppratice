@@ -63,4 +63,36 @@ public class hiController {
         return  "login";
     }
 
+    @RequestMapping("/deleteuser")
+    public  String deleteuser(HttpServletRequest request,Map<String,Object> map){
+        String username = request.getParameter("username");
+        User getuser = usermapper.getuser(username);
+        if (getuser!=null){
+            usermapper.deleteuser(username);
+            map.put("msg3","the user has been updated!");
+            return  "login";
+        }else {
+            map.put("msg3","the user is not a legal user");
+            return "login";
+        }
+
+    }
+
+    @RequestMapping("/updateuser")
+    public String update(HttpServletRequest request,Map<String,Object> map){
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User getuser = usermapper.getuser(username);
+        if (getuser!=null){
+            usermapper.updateuser(username,password);
+            map.put("msg4","the user has been updated!");
+            return  "login";
+        }else {
+            map.put("msg4","the user is not a legal user");
+            return "login";
+        }
+
+
+    }
+
 }
